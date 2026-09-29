@@ -1,0 +1,146 @@
+/* ------------------------------------------------------------------
+   Neon Particle Heart — UI styles
+   Theme colours are driven by CSS variables on the body's
+   data-theme attribute, so adding a theme is a single HTML/CSS pair.
+------------------------------------------------------------------- */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  color-scheme: dark;
+  --bg: #000;
+  --glow: radial-gradient(circle at 50% 50%, transparent 0%, transparent 100%);
+  --panel-bg: rgba(255, 255, 255, 0.06);
+  --panel-border: rgba(255, 255, 255, 0.15);
+  --accent-border: rgba(255, 255, 255, 0.7);
+  --text: rgba(255, 255, 255, 0.9);
+}
+
+body[data-theme='molten'] {
+  --bg: linear-gradient(180deg, #000 0%, #100500 50%, #1f0a00 100%);
+  --glow: radial-gradient(
+    circle at 50% 50%,
+    rgba(255, 100, 0, 0.05) 0%,
+    rgba(200, 50, 0, 0.05) 50%,
+    transparent 65%
+  );
+  --panel-bg: rgba(50, 20, 10, 0.3);
+  --panel-border: rgba(255, 120, 50, 0.4);
+  --accent-border: rgba(255, 100, 0, 0.7);
+}
+
+body[data-theme='cosmic'] {
+  --bg: linear-gradient(180deg, #000 0%, #050010 50%, #0a001f 100%);
+  --glow: radial-gradient(
+    circle at 50% 50%,
+    rgba(147, 112, 219, 0.05) 0%,
+    rgba(75, 0, 130, 0.05) 50%,
+    transparent 65%
+  );
+  --panel-bg: rgba(40, 20, 60, 0.3);
+  --panel-border: rgba(147, 112, 219, 0.4);
+  --accent-border: rgba(147, 112, 219, 0.7);
+}
+
+body[data-theme='emerald'] {
+  --bg: linear-gradient(180deg, #000 0%, #001005 50%, #001f0a 100%);
+  --glow: radial-gradient(
+    circle at 50% 50%,
+    rgba(0, 255, 127, 0.05) 0%,
+    rgba(46, 139, 87, 0.05) 50%,
+    transparent 65%
+  );
+  --panel-bg: rgba(20, 60, 40, 0.3);
+  --panel-border: rgba(60, 179, 113, 0.4);
+  --accent-border: rgba(60, 179, 113, 0.7);
+}
+
+body {
+  overflow: hidden;
+  background: var(--bg);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text);
+  transition: background 1.5s ease;
+}
+
+#container {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+}
+
+/* Ambient glow behind the particle field */
+.glow {
+  position: fixed;
+  inset: 0;
+  background: var(--glow);
+  pointer-events: none;
+  mix-blend-mode: screen;
+  opacity: 0.75;
+  transition: background 1.5s ease;
+}
+
+/* Control bar */
+#controls {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  z-index: 100;
+  padding: 10px 20px;
+  border: 1px solid var(--panel-border);
+  border-radius: 16px;
+  background: var(--panel-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  transition: background 1.5s ease, border-color 1.5s ease;
+}
+
+.separator {
+  width: 1px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.action-btn {
+  padding: 6px 10px;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.3s, background 0.3s;
+}
+
+.action-btn:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.action-btn.active {
+  color: #fff;
+  text-shadow: 0 0 12px var(--accent-border);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  #controls {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+    bottom: 15px;
+  }
+  .separator {
+    display: none;
+  }
+}
